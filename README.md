@@ -1,7 +1,5 @@
 # Bike Sports
 
-<!-- https://alura-github-thumbnail-generator.vercel.app/ -->
-
 <h4 align="center"> 
 	Bike Sports
 </h4>
@@ -51,12 +49,8 @@ $ npm install
 
 ```bash
 # Execute em outro terminal (dentro da pasta filipov-bike-sports)
-$ expo start
+$ expo start -c
 ```
-
-
-
-Espero que você utilize ao máximo deste projeto para se aprimorar! E se quiser dar um salve, estou lá no LinkedIn [Marcelo Filipov](https://www.linkedin.com/in/marcelo-filipov-mba-a902b49/). :wave: 
 
 [nodejs]: https://nodejs.org/
 [expo]: https://docs.expo.dev/
