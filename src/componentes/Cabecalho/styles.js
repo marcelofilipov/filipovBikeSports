@@ -1,19 +1,22 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  botao: {
-    height: 40,
+  container: {
+    height: 60,
     width: "100%",
-    borderRadius: 5,
-    backgroundColor: "#1E8187",
+    backgroundColor: "#0E6BA8",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 20,
+    flexDirection: "row",
   },
-  textoBotao: {
-    fontSize: 15,
+  texto: {
+    fontSize: 20,
     fontFamily: "Roboto",
-    fontWeight: "700",
+    fontWeight: "500",
     color: "#fff",
-  }
+  },
+  botao: {
+    position: "absolute",
+    right: 20,
+  },
 });

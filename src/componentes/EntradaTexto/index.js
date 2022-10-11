@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { TextInput, HelperText } from 'react-native-paper';
-import estilos from './estilos';
+import styles from './styles';
 
 export function EntradaTexto({ label, value, onChangeText, secureTextEntry, error, messageError }) {
   const [secureMode, setSecureMode] = useState(secureTextEntry);
@@ -13,15 +13,15 @@ export function EntradaTexto({ label, value, onChangeText, secureTextEntry, erro
         error={error}
         secureTextEntry={secureMode}
         onChangeText={onChangeText}
-        style={estilos.input}
+        style={styles.input}
         mode="outlined"
-        activeOutlineColor='#1E8187'
+        activeOutlineColor='#0E6BA8'
         right={
           secureTextEntry ?
-          <TextInput.Icon
-            name={secureMode ? 'eye-off' : 'eye'}
-            onPress={() => setSecureMode(!secureMode)}
-          /> : null
+            <TextInput.Icon
+              name={secureMode ? 'eye-off' : 'eye'}
+              onPress={() => setSecureMode(!secureMode)}
+            /> : null
         }
       />
       {error && <HelperText type="error" visible={error}>
