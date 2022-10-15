@@ -7,9 +7,14 @@ import styles from './styles';
 export default function Principal({ navigation }) {
     const usuario = auth.currentUser;
 
+    function deslogar() {
+        auth.signOut();
+        navigation.replace('Login');
+    }
+
     return (
         <View style={styles.container}>
-            <Cabecalho navigation={navigation} />
+            <Cabecalho logout={deslogar} />
             <Text style={styles.texto}>Usuário: {usuario.email}</Text>
 
             <Produto nome="Sapatilha Shimano" preco="900,00" />
