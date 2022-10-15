@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Alerta } from '../../componentes/Alerta';
 import Botao from '../../componentes/Botao';
 import { EntradaTexto } from '../../componentes/EntradaTexto';
+import { auth } from '../../config/firebase';
 import { logar } from '../../servicos/requisicoesFirebase';
 import styles from './styles';
 
@@ -11,6 +12,16 @@ export default function Login({ navigation }) {
     const [senha, setSenha] = useState('');
     const [statusError, setStatusError] = useState('');
     const [messageError, setMessageError] = useState('');
+
+    useEffect(() => {
+        const estadoUsuario = auth.onAuthStateChanged(
+            usuario => {
+                if (usuario) {
+                    navigation.replace('Principal');
+                }
+            })
+        return () => estadoUsuario();
+    }, [])
 
     async function realizarLogin() {
         if (email == '') {
