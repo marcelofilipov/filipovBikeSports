@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Alert, View } from 'react-native';
+import { Alerta } from '../../componentes/Alerta';
 import Botao from '../../componentes/Botao';
 import { EntradaTexto } from '../../componentes/EntradaTexto';
 import styles from './styles';
@@ -28,17 +29,15 @@ export default function Cadastro({ navigation }) {
             setMessageError('As senhas não conferem');
             setStatusError('confirmaSenha');
         } else {
-            setStatusError('');
-            setMessageError('');
-
             const resultado = await cadastrar(email, senha);
+            setStatusError('firebase');
             if (resultado == 'Sucesso') {
-                Alert.alert('Usuário cadastro com sucesso!');
+                setMessageError('Usuário criado com sucesso!');
                 setEmail('');
                 setSenha('');
                 setConfirmaSenha('');
             } else {
-                Alert.alert(resultado);
+                setMessageError(resultado);
             }
         }
     }
@@ -60,7 +59,6 @@ export default function Cadastro({ navigation }) {
                 error={statusError == 'senha'}
                 messageError={messageError}
             />
-
             <EntradaTexto
                 label="Confirmar Senha"
                 value={confirmaSenha}
@@ -68,6 +66,12 @@ export default function Cadastro({ navigation }) {
                 secureTextEntry
                 error={statusError == 'confirmaSenha'}
                 messageError={messageError}
+            />
+
+            <Alerta
+                mensagem={messageError}
+                error={statusError == 'firebase'}
+                setError={setStatusError}
             />
 
             <Botao onPress={() => realizarCadastro()}>CADASTRAR</Botao>
