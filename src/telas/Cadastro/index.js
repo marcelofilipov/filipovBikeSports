@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 import { Alerta } from '../../componentes/Alerta';
 import Botao from '../../componentes/Botao';
 import { EntradaTexto } from '../../componentes/EntradaTexto';
 import styles from './styles';
-import { auth } from '../../config/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth/react-native';
 import { cadastrar } from '../../servicos/requisicoesFirebase';
 
 export default function Cadastro({ navigation }) {
@@ -72,6 +70,7 @@ export default function Cadastro({ navigation }) {
                 mensagem={messageError}
                 error={statusError == 'firebase'}
                 setError={setStatusError}
+                tempo={2500}
             />
 
             <Botao onPress={() => realizarCadastro()}>CADASTRAR</Botao>
