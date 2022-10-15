@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View } from 'react-native';
 import { Alerta } from '../../componentes/Alerta';
 import Botao from '../../componentes/Botao';
