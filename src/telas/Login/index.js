@@ -31,22 +31,30 @@ export default function Login({ navigation }) {
         return () => estadoUsuario();
     }, []);
 
-    async function realizarLogin() {
-        if (dados.email == "") {
-            setMessageError("O e-mail é obrigatório");
-            setStatusError("email");
-        } else if (dados.senha == "") {
-            setMessageError("A senha é obrigatório");
-            setStatusError("senha");
-        } else {
-            const resultado = await logar(dados.email, dados.senha);
-            if (resultado == "Erro") {
-                setStatusError("firebase");
-                setMessageError("E-mail ou Senha não conferem");
-            } else {
-                navigation.replace("Principal");
+    function verificaSeTemEntradaVazia() {
+        for (const [variavel, valor] of Object.entries(dados)) {
+            if (valor == "") {
+                setDados({
+                    ...dados,
+                    [variavel]: null,
+                });
+                return true;
             }
         }
+        return false;
+    }
+
+    async function realizarLogin() {
+        // * função para verificar se email ou senha são vazios
+        if (verificaSeTemEntradaVazia()) return;
+
+        const resultado = await logar(dados.email, dados.senha);
+        if (resultado == "Erro") {
+            setStatusError(true);
+            setMessageError("E-mail ou Senha não conferem");
+            return;
+        }
+        navigation.replace("Principal");
     }
 
     if (carregando) {
@@ -74,7 +82,7 @@ export default function Login({ navigation }) {
 
             <Alerta
                 mensagem={messageError}
-                error={statusError == "firebase"}
+                error={statusError}
                 setError={setStatusError}
             />
 
