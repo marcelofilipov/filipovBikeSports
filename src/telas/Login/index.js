@@ -6,7 +6,7 @@ import { EntradaTexto } from "../../componentes/EntradaTexto";
 import { auth } from "../../config/firebase";
 import { logar } from "../../servicos/requisicoesFirebase";
 import styles from "./styles";
-import { alteraDados } from "../../utils/comum";
+import { alteraDados, verificaSeTemEntradaVazia } from "../../utils/comum";
 import { entradas } from "./inputs";
 
 import animacaoCarregando from "../../../assets/animacaoCarregando.gif";
@@ -31,22 +31,9 @@ export default function Login({ navigation }) {
         return () => estadoUsuario();
     }, []);
 
-    function verificaSeTemEntradaVazia() {
-        for (const [variavel, valor] of Object.entries(dados)) {
-            if (valor == "") {
-                setDados({
-                    ...dados,
-                    [variavel]: null,
-                });
-                return true;
-            }
-        }
-        return false;
-    }
-
     async function realizarLogin() {
         // * função para verificar se email ou senha são vazios
-        if (verificaSeTemEntradaVazia()) return;
+        if (verificaSeTemEntradaVazia(dados, setDados)) return;
 
         const resultado = await logar(dados.email, dados.senha);
         if (resultado == "Erro") {
