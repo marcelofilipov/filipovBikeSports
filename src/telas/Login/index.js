@@ -7,6 +7,7 @@ import { auth } from "../../config/firebase";
 import { logar } from "../../servicos/requisicoesFirebase";
 import styles from "./styles";
 import { alteraDados } from "../../utils/comum";
+import { entradas } from "./inputs";
 
 import animacaoCarregando from "../../../assets/animacaoCarregando.gif";
 
@@ -58,25 +59,18 @@ export default function Login({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <EntradaTexto
-                label="E-mail"
-                value={dados.email}
-                onChangeText={(val) =>
-                    alteraDados("email", val, dados, setDados)
-                }
-                error={statusError == "email"}
-                messageError={messageError}
-            />
-            <EntradaTexto
-                label="Senha"
-                value={dados.senha}
-                onChangeText={(val) =>
-                    alteraDados("senha", val, dados, setDados)
-                }
-                secureTextEntry
-                error={statusError == "senha"}
-                messageError={messageError}
-            />
+            {entradas.map((entrada) => {
+                return (
+                    <EntradaTexto
+                        key={entrada.id}
+                        {...entrada}
+                        value={dados[entrada.name]}
+                        onChangeText={(valor) =>
+                            alteraDados(entrada.name, valor, dados, setDados)
+                        }
+                    />
+                );
+            })}
 
             <Alerta
                 mensagem={messageError}
