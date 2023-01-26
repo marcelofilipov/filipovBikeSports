@@ -1,15 +1,16 @@
-import { View, Text } from 'react-native';
-import { auth } from '../../config/firebase';
-import Cabecalho from '../../componentes/Cabecalho';
-import Produto from '../../componentes/Produtos';
-import styles from './styles';
+import { View, Text } from "react-native";
+import { auth } from "../../config/firebase";
+import Cabecalho from "../../componentes/Cabecalho";
+import Produto from "../../componentes/Produtos";
+import { BotaoProduto } from "../../componentes/BotaoProduto";
+import styles from "./styles";
 
 export default function Principal({ navigation }) {
     const usuario = auth.currentUser;
 
     function deslogar() {
         auth.signOut();
-        navigation.replace('Login');
+        navigation.replace("Login");
     }
 
     return (
@@ -20,6 +21,8 @@ export default function Principal({ navigation }) {
             <Produto nome="Sapatilha Shimano" preco="900,00" />
             <Produto nome="Selim Selle Italia" preco="1.200,00" />
             <Produto nome="Suplementos" preco="150,00" />
+
+            <BotaoProduto onPress={() => navigation.navigate("DadosProduto")} />
         </View>
     );
 }
