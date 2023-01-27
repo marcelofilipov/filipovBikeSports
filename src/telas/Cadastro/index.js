@@ -4,7 +4,7 @@ import { Alerta } from "../../componentes/Alerta";
 import Botao from "../../componentes/Botao";
 import { EntradaTexto } from "../../componentes/EntradaTexto";
 import styles from "./styles";
-import { cadastrar } from "../../servicos/requisicoesFirebase";
+import { cadastrar } from "../../servicos/auth";
 import { alteraDados, verificaSeTemEntradaVazia } from "../../utils/comum";
 import { entradas } from "./inputs";
 
