@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { auth } from "../../config/firebase";
+import { pegarProdutos } from "../../servicos/firestore";
 import Cabecalho from "../../componentes/Cabecalho";
 import Produto from "../../componentes/Produtos";
 import { BotaoProduto } from "../../componentes/BotaoProduto";
@@ -7,6 +9,15 @@ import styles from "./styles";
 
 export default function Principal({ navigation }) {
     const usuario = auth.currentUser;
+    const [produtos, setProdutos] = useState([]);
+
+    useEffect(() => {
+        async function carregarDadosProdutos() {
+            const produtosFirestore = await pegarProdutos();
+            setProdutos(produtosFirestore);
+        }
+        carregarDadosProdutos();
+    }, []);
 
     function deslogar() {
         auth.signOut();
@@ -18,9 +29,15 @@ export default function Principal({ navigation }) {
             <Cabecalho logout={deslogar} />
             <Text style={styles.texto}>Usuário: {usuario.email}</Text>
 
-            <Produto nome="Sapatilha Shimano" preco="900,00" />
-            <Produto nome="Selim Selle Italia" preco="1.200,00" />
-            <Produto nome="Suplementos" preco="150,00" />
+            {produtos.map((produto) => {
+                return (
+                    <Produto
+                        nome={produto.nome}
+                        preco={produto.preco}
+                        key={produto.id}
+                    />
+                );
+            })}
 
             <BotaoProduto onPress={() => navigation.navigate("DadosProduto")} />
         </View>
