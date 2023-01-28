@@ -12,19 +12,18 @@
 
 ## :information_source: O que é o Bike Sports?
 
-O Bike Sports é uma aplicação feita em React Native que permite aos usuários encontrarem produtos relacionados ao ciclismo. Nessa aplicação foi integrado o Firebase para que os usuários possam se cadastrar e fazer login.
-
+O Bike Sports é uma aplicação feita em React Native que permite aos usuários encontrarem produtos relacionados ao ciclismo. Nessa aplicação foi integrado o Firebase Authentication e Firestore para que os usuários possam se cadastrar e fazer login.
 
 <h1 align="center">
     <img alt="Demonstracao" title="Demonstracao" src=".images/demo.gif" width="400px" />
 </h1>
 
-
 ## :rocket: Tecnologias
 
 Esse projeto foi desenvolvido com a utilização das seguintes tecnologias:
-- [React Native][rn]
-- [Expo][expo]
+
+-   [React Native][rn]
+-   [Expo][expo]
 
 ## :information_source: Como usar
 
@@ -36,13 +35,15 @@ No terminal, digite os comandos a seguir:
 
 ```bash
 # Clonar esse repositório
-$ git clone https://github.com/marcelofilipov/filipov-bike-sports.git
+$ git clone https://github.com/marcelofilipov/filipovBikeSports.git
 
 # Vá para o ropositório
-$ cd filipov-bike-sports
+$ cd filipovBikeSports
 
 # Instale as dependências
 $ npm install
+ou
+$ yarn install
 ```
 
 ### Executar o Mobile
