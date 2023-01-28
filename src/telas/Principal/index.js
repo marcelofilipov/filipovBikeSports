@@ -7,7 +7,10 @@ import {
     TouchableOpacity,
 } from "react-native";
 import { auth } from "../../config/firebase";
-import { pegarProdutos } from "../../servicos/firestore";
+import {
+    pegarProdutos,
+    pegarProdutosTempoReal,
+} from "../../servicos/firestore";
 import Cabecalho from "../../componentes/Cabecalho";
 import Produto from "../../componentes/Produtos";
 import { BotaoProduto } from "../../componentes/BotaoProduto";
@@ -20,6 +23,7 @@ export default function Principal({ navigation }) {
 
     useEffect(() => {
         carregarDadosProdutos();
+        pegarProdutosTempoReal(setProdutos);
     }, []);
 
     async function carregarDadosProdutos() {

@@ -6,6 +6,9 @@ import {
     doc,
     updateDoc,
     deleteDoc,
+    query,
+    where,
+    onSnapshot,
 } from "firebase/firestore";
 
 export async function salvarProduto(data) {
@@ -31,6 +34,17 @@ export async function pegarProdutos() {
         console.log("Erro ao tentar obter produtos: ", error);
         return [];
     }
+}
+
+export async function pegarProdutosTempoReal(setProdutos) {
+    const ref = query(collection(db, "produtos"));
+    onSnapshot(ref, (querySnapshot) => {
+        let produtos = [];
+        querySnapshot.forEach((doc) => {
+            produtos.push({ id: doc.id, ...doc.data() });
+        });
+        setProdutos(produtos);
+    });
 }
 
 export async function atualizarProduto(produtoID, data) {
