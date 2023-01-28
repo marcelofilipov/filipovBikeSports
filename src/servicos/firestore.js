@@ -5,6 +5,7 @@ import {
     getDocs,
     doc,
     updateDoc,
+    deleteDoc,
 } from "firebase/firestore";
 
 export async function salvarProduto(data) {
@@ -39,6 +40,17 @@ export async function atualizarProduto(produtoID, data) {
         return "ok";
     } catch (error) {
         console.log("Erro ao tentar alterar produto: ", error);
+        return "error";
+    }
+}
+
+export async function deletarProduto(produtoID) {
+    try {
+        const produtoRef = doc(db, "produtos", produtoID);
+        await deleteDoc(produtoRef);
+        return "ok";
+    } catch (error) {
+        console.log("Erro ao tentar excluir produto: ", error);
         return "error";
     }
 }
