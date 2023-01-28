@@ -1,12 +1,18 @@
 import { db } from "../config/firebase";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+    collection,
+    addDoc,
+    getDocs,
+    doc,
+    updateDoc,
+} from "firebase/firestore";
 
 export async function salvarProduto(data) {
     try {
         await addDoc(collection(db, "produtos"), data);
         return "ok";
     } catch (error) {
-        console.log("Erro ao salvar produto: ", error);
+        console.log("Erro ao tentar salvar produto: ", error);
         return "erro";
     }
 }
@@ -21,7 +27,18 @@ export async function pegarProdutos() {
         });
         return produtos;
     } catch (error) {
-        console.log("Erro ao pegar produtos: ", error);
+        console.log("Erro ao tentar obter produtos: ", error);
         return [];
+    }
+}
+
+export async function atualizarProduto(produtoID, data) {
+    try {
+        const produtoRef = doc(db, "produtos", produtoID);
+        await updateDoc(produtoRef, data);
+        return "ok";
+    } catch (error) {
+        console.log("Erro ao tentar alterar produto: ", error);
+        return "error";
     }
 }

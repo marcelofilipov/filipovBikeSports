@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { View } from "react-native";
 import { EntradaTexto } from "../../componentes/EntradaTexto";
-import { salvarProduto } from "../../servicos/firestore";
+import { salvarProduto, atualizarProduto } from "../../servicos/firestore";
 import Botao from "../../componentes/Botao";
 import { Alerta } from "../../componentes/Alerta";
 import styles from "./styles";
 
-export default function DadosProdutos({ navigation }) {
-    const [nome, setNome] = useState("");
-    const [preco, setPreco] = useState("");
+export default function DadosProdutos({ navigation, route }) {
+    const [nome, setNome] = useState(route?.params?.nome || "");
+    const [preco, setPreco] = useState(route?.params?.preco || "");
     const [mensagem, setMensagem] = useState("");
     const [mostrarMensagem, setMostrarMensagem] = useState(false);
 
@@ -19,9 +19,18 @@ export default function DadosProdutos({ navigation }) {
             return;
         }
 
-        const resultado = await salvarProduto({ nome, preco });
+        let resultado = "";
+        if (route?.params) {
+            resultado = await atualizarProduto(route?.params?.id, {
+                nome,
+                preco,
+            });
+        } else {
+            resultado = await salvarProduto({ nome, preco });
+        }
+
         if (resultado == "erro") {
-            setMensagem("Erro ao salvar produto");
+            setMensagem("Erro ao salvar/atualizar produto");
             setMostrarMensagem(true);
         } else {
             navigation.goBack();
